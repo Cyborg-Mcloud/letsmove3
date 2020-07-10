@@ -175,7 +175,6 @@ function brain_recv(){
 			if (typeof obj["login_data"] !== 'undefined') {
 				
 				if (typeof obj["error"] !== 'undefined') {
-
 					alert(obj["error"]);
 				} else {
 					uid=obj["uid"];

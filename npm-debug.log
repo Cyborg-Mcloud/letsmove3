@@ -1,0 +1,27 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/opt/node-v10.15.3/bin/node',
+1 verbose cli   '/project/node_modules/.bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'watch' ]
+2 info using npm@2.15.12
+3 info using node@v10.15.3
+4 warn invalid config loglevel="notice"
+5 verbose stack Error: missing script: watch
+5 verbose stack     at run (/project/node_modules/npm/lib/run-script.js:142:19)
+5 verbose stack     at /project/node_modules/npm/lib/run-script.js:58:5
+5 verbose stack     at /project/node_modules/npm/node_modules/read-package-json/read-json.js:356:5
+5 verbose stack     at checkBinReferences_ (/project/node_modules/npm/node_modules/read-package-json/read-json.js:320:45)
+5 verbose stack     at final (/project/node_modules/npm/node_modules/read-package-json/read-json.js:354:3)
+5 verbose stack     at then (/project/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
+5 verbose stack     at /project/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
+5 verbose stack     at /project/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+5 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+6 verbose cwd /project
+7 error Linux 4.9.0-8-amd64
+8 error argv "/opt/node-v10.15.3/bin/node" "/project/node_modules/.bin/npm" "run" "watch"
+9 error node v10.15.3
+10 error npm  v2.15.12
+11 error missing script: watch
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

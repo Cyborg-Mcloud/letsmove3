@@ -164,6 +164,7 @@ function signin()
 		}
 	else
 		{
+      document.getElementById("email").value="sending login";
 		send_login_info();
 		}
 	}

@@ -41,17 +41,13 @@
 	
 
   </style>
-  <body onmouseup="Javascript: pop_right_hider(event);">
-<div id='wrapper_div' class="wrapper_div">
-
-
-	<div id='blocked_screen' style='width:100%; height:100%; position:absolute; left:0px; top:0px;display: none; color:Red; font-size:20px; '>
+  <body onmouseup="Javascript: pop_right_hider(event);" style='padding:0px; margin:0px; border:0px;'><div id='wrapper_div' class="wrapper_div">
+    <div id='blocked_screen' style='width:100%; height:100%; position:absolute; left:0px; top:0px;display: none; color:Red; font-size:20px; '>
 		<center>
 		<Br><br><br><Br><br><br>
 			YOU HAVE BEEN BLOCKED<BR><bR>Wait time:<BR>
 		<div id='block_wait_time'></div>
 	</div>
-
 	<div id='loading_screen' style='width:100%; height:100%; position:absolute; left:0px; top:0px;display: none;'>
 		<center>
 		<Br><br><br><Br><br><br>
@@ -60,9 +56,6 @@
 		<div id='infodiv2' style='color:red; '></div>
 		<div id='infodiv' style='color:red; display:none;'></div>
 	</div>
-
-
-
 	<div id='home_screen' style='display:none; width:100%; height:100%; position:absolute; left:0px; top:0px;'>
 
 		<img src='images/zeda_bar_1.png' style='position:absolute; left:2%; top:0px; width:96%; z-index:101;' id='zeda_bar'>
@@ -192,7 +185,7 @@
 				<div class=""style="width: 300px;height: 33px;">
 					<a href='Javascript: forgotten();' style='color: #a0a8ce; width:150px; float:right;font-family: lato_medium_it;'>Forgot password</a>
 				</div>
-				<a href='Javascript: signin();'class="log_in"><img src='images/edit_prof_2.png'> <span>SIGN IN</span></a>
+				<a href='Javascript: signin();' class="log_in"><img src='images/edit_prof_2.png'> <span>SIGN IN</span></a>
 			
 				<a href='Javascript: mylogin();'class="log_faceb" style="color: #ebebeb; font-size: 12px;line-height:4;">CONTINUE WITH FACEBOOK</a>
 				

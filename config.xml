@@ -40,17 +40,17 @@
         <string>location</string>
       </array>
     </gap:config-file>
-    <preference name="WKWebViewOnly" value="true"/>
-    <feature name="CDVWKWebViewEngine">
-      <param name="ios-package" value="CDVWKWebViewEngine"/>
-    </feature>
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
     <splash src="/res/ios/screen/Default@2x~universal~anyany.png"/>
     <config-file platform="ios" parent="CFBundleLocalizations" target="*-Info.plist">
       <array>
         <string>en</string>
       </array>
     </config-file>
+    <preference name="WKWebViewOnly" value="true"/>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
+    <feature name="CDVWKWebViewEngine">
+      <param name="ios-package" value="CDVWKWebViewEngine"/>
+    </feature>
   </platform>
   <preference name="android-build-tool" value="gradle"/>
   <preference name="phonegap-version" value="cli-9.0.0"/>

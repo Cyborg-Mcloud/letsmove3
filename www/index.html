@@ -1,17 +1,775 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+
+	<meta http-equiv=“Pragma” content=”no-cache”>
+	<meta http-equiv=“Expires” content=”-1″>
+	<meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+	
+	<meta charset="UTF-8">
+	
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=365">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://www.facebook.com/ https://www.sandbox.paypal.com https://connect.facebook.net https://developers.facebook.com https://maps.googleapis.com https://www.paypal.com https://www.paypalobjects.com https://www.google-analytics.com https://debug.monaca.mobi 'unsafe-inline' 'unsafe-eval'; default-src * data: gap: content: https://ssl.gstatic.com; img-src 'self' https://maps.googleapis.com/ https://maps.gstatic.com https://smartgps.ge https://www.smartgps.ge https://graph.facebook.com data: https: 'unsafe-inline' 'unsafe-eval' 'unsafe-hashes' ; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; ">
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>LetsMove2</title>
     <script src="components/loader.js"></script>
     <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script>
-    </script>
-</head>
-<body>
-	<br />
-    This is a template for Monaca app.
+
+	
+	<link rel="stylesheet" href="styles.css">
+	<script type='application/javascript' src='fastclick.js'></script>
+	<script type="text/javascript" charset="utf-8" src="main.js"></script>
+	<script type="text/javascript" charset="utf-8" src="gps.js"></script>
+	<script type="text/javascript" charset="utf-8" src="login.js"></script>
+	<script type="text/javascript" charset="utf-8" src="map.js"></script>
+	<script type="text/javascript" charset="utf-8" src="func.js"></script>
+ </head>
+
+	
+		
+  <style>
+
+
+	*{
+		-webkit-transition-property: none!important;
+		transition-property: none!important;
+		-webkit-animation: none!important;
+		animation: none!important;
+	}
+
+	
+
+  </style>
+  <body onmouseup="Javascript: pop_right_hider(event);">
+<div id='wrapper_div' class="wrapper_div">
+
+
+	<div id='blocked_screen' style='width:100%; height:100%; position:absolute; left:0px; top:0px;display: none; color:Red; font-size:20px; '>
+		<center>
+		<Br><br><br><Br><br><br>
+			YOU HAVE BEEN BLOCKED<BR><bR>Wait time:<BR>
+		<div id='block_wait_time'></div>
+	</div>
+
+	<div id='loading_screen' style='width:100%; height:100%; position:absolute; left:0px; top:0px;display: none;'>
+		<center>
+		<Br><br><br><Br><br><br>
+		<img src='icon_1024.png' style='width:90%;'>
+		
+		<div id='infodiv2' style='color:red; '></div>
+		<div id='infodiv' style='color:red; display:none;'></div>
+	</div>
+
+
+
+	<div id='home_screen' style='display:none; width:100%; height:100%; position:absolute; left:0px; top:0px;'>
+
+		<img src='images/zeda_bar_1.png' style='position:absolute; left:2%; top:0px; width:96%; z-index:101;' id='zeda_bar'>
+		<div style='background-color:#292b4e; height:87px; width:100%; position:absolute; right:0px; bottom:0px; z-index:101;' >
+			<div style='color:white; margin-left:130px; margin-top:5px;' id='pinfo'></div>
+		</div>
+		<div class="pop_left_wrapper" onclick="Javascript: back_to_home();" id="pop_left">
+			<a class="pop_left">
+				<span></span>
+			</a>
+		</div>
+		
+
+		<div id='congrads' style='position:absolute; left 0px; top:40%; width:100%;'>
+			Congradulations<Br><Br>
+			You are <div id='youare'></div>
+
+		</div>
+
+		<div id='timer' style='position:absolute; top:10px; right:10px; z-index:1003; background-color:#3f446d; display:block; padding:7px; border-radius:50%; color:white; font-family:lato_bold;'>4:59</div>
+
+		<div style="height:113px; overflow:hidden;position:absolute; left:0;bottom:0;width:125px;">
+			<div id="mymap2" style=' height:125px; width:125px; position:absolute; bottom:-20px; left:-4px; z-index:102; background-color:black;  border-radius: 0px 20px 0px 0px; border:4px solid #113356;'></div>
+		</div>
+		<div id="mymap" style='height:90vh; width:100%; position:absolute; top:0px; left:0px; '></div>
+
+
+
+		<a href='Javascript: mapset(1);' style='position:absolute; right:10px; bottom:110px; width:49px; height:49px;  '><img src='images/icon_onme.png' width=50px id='onme_img' ></a>
+		<a href='Javascript: mapset(2);' style='position:absolute; right:10px; bottom:160px; width:49px; height:49px; '><img src='images/icon_fit.png' width=50px></a>
+		<a href='Javascript: mapset(3);' style='position:absolute; right:10px; bottom:210px; width:49px; height:49px;  '><img src='images/icon_target.png' width=50px></a>
+
+		<a href='Javascript: grats_close();' style=' color:Red; position:absolute; right:10px; bottom:270px; display:none; ' id='show_leaderb_but'>Leaderboard</a>
+
+		
+
+		<div class="game_menu" id='game_menu' >
+			<img class="back_img" style="z-index:-1"src="images/background_2.png">
+			<div class="pop_right"id="pop_right">
+				<span id="pop_right_span">
+					<img src="images/menu_icon_2.png">
+				</span>
+				<a href="Javascript: show_screen('profile');"id='profile_txt_old'>
+					<table><tr><td valign=middle>
+					<img src="images/mini_foto.png">
+					</td><td>
+
+						PROFILE
+					</td>
+					</tr></table>
+					
+				</a>
+				<a href="Javascript: show_screen('support');" id="support_txt">SUPPORT</a>
+				<!--<a href="#"id="chat_txt">CHAT</a> tu daamateb func.js shic unda chaamato-->
+			</div>
+			<div class="menu_logo">
+				<a><img src='images/letsmove_2.png'></a>
+			</div>
+			<p>Choose Game Mode</p>
+			<div onclick='Javascript: change_game_mode(2);' class="campaign">
+				<img src='images/campaign_2.png'>
+				<a class="menu_title">Campaign</a>
+			</div>
+			<div onclick='Javascript: change_game_mode(1);' class="hot_chal">
+				<img src='images/hot_chal_2.png'>
+				<a class="menu_title">Hot Challenge</a>
+				<a class="menu_startin"style="">starting in:</a>
+				<div id='timer2' style='background-color:#59142e; border:1px solid #b23a56; display:inline-block; border-radius:10px; padding:15px; position:absolute; font-size: 20px;left:20px; bottom:20px; z-index:500; '>01:02:30</div>
+			</div>
+			<a class="prof_sub" href='Javascript: open_subscribe();' id='subscribe_but'>Earn Money</a>
+			<!--<a class="menu_pry" style='display:none;'>pry</a>-->
+			<a style="display:block"href='Javascript: toggle_debug();' id='toggle_debug2'  style='display:none;'>Toggle Debug</a>
+		</div>
+
+		<div id='grats_div' style='display:none; position:absolute; left:0%; top:35%;width:100%; background-color:#205690;'>
+		<center><Br><br>
+			You have reached distination<BR><BR>
+			<a href='Javascript: grats_close();'>Close</a>
+			<br>
+			<br><br></center>
+		</div>
+		
+		<div id='small_grats_div' style='display:none; position:absolute; left:0%; top:35%;width:100%; background-color:#205690;'>
+		<center><Br><br>
+			You have taken the point<BR><BR>
+			<a href='Javascript: small_grats_close();'>Next</a>
+			<br>
+			<br><br></center>
+		</div>
+		
+		
+		<div id='leaderboard' style='display:none; position:absolute; left:0%; top:20%; height:60%; width:100%; text-align:center;  background-color:#205690;'>
+			Leaderboard
+			<div id='leaderboard_txt' style='margin-top:20px; color:white; font-size:20px; text-align:left; padding-left:30px;'>
+			</div>
+			<a href='Javascript: leader_close();'>Close</a>
+		</div>
+
+		<div id='speed_limit_div' style='display:none; position:absolute; left:0%; top:20%; height:60%; width:100%; text-align:center;  background-color:#205690;'>
+			Leaderboard
+			<div id='speed_limit_text' style='margin-top:20px; color:white; font-size:20px; text-align:left; padding-left:30px;'>
+			</div><br>
+			<div id='speed_limit_value' style='margin-top:20px; color:red; font-size:20px; text-align:left; padding-left:30px;'>
+			</div>
+			<a href='Javascript: speed_limit_close();'>Close</a>
+		</div>
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFY47FE__z9AvRLBoYG0T2XeOTiHdwzOQ&callback=initMap"></script>
+	</div>
+
+
+
+
+	<div id='login_screen' class="login_screen">
+	<div class="login_footer"></div>
+		<div id="fb-root"></div>
+
+		<div style='/*background: rgb(30,32,43); background: linear-gradient(0deg, rgba(30,32,43,1) 0%, rgba(37,41,53,1) 100%);*/overflow:auto;'>
+		<img class="back_img" src="images/background_2.png">
+			<center>
+			<div id="login_logo" class="login_logo"style=""><a><img class="login_logo_img" src='images/letsmove_2.png'></a></div>
+			<div id='logindiv'class="logindiv">
+
+				
+				<input style="background-color:#d2d4d9 !important;"class="log_inp" type="email" placeholder="Email" name='email' id='email'>
+				<input class="log_inp"type="password" placeholder="Password" name='pass' id='pass'>
+				<div class=""style="width: 300px;height: 33px;">
+					<a href='Javascript: forgotten();' style='color: #a0a8ce; width:150px; float:right;font-family: lato_medium_it;'>Forgot password</a>
+				</div>
+				<a href='Javascript: signin();'class="log_in"><img src='images/edit_prof_2.png'> <span>SIGN IN</span></a>
+			
+				<a href='Javascript: mylogin();'class="log_faceb" style="color: #ebebeb; font-size: 12px;line-height:4;">CONTINUE WITH FACEBOOK</a>
+				
+				<a style="color: #a0a8ce; margin-top: 8vh; display: block;font-size:13px;">Don't have an acount yet?</a>
+
+				<a href='Javascript: show_reg();' class="log_siup" >SIGN UP</a>
+				<Br><Br>
+				<a href='Javascript: toggle_debug();' id='toggle_debug1' style='display:none;'>Toggle Debug</a>
+				<br>
+			</div>
+
+			<div id='regdiv' class="regdiv">
+				
+				<input type="hidden" id="fbid" name="fbid"  >
+				<!--<input class="log_inp" type="tel"  size='20' id="reg_tel" name="reg_tel"  placeholder="Telephone" >-->
+				<input class="log_inp" type="text"   id="reg_uname" name="reg_uname" placeholder="Username" >
+				<input class="log_inp" type="email"  id="reg_email" name="reg_email" aria-describedby="emailHelp" placeholder="Email" >
+				<input class="log_inp" type="password" id="reg_pass1" name="reg_pass1" placeholder="Password" >
+				<input class="log_inp" type="password"id="reg_pass2" name ="reg_pass2"placeholder="Repeat Password" >
+				<input class="log_inp" type="text" id="referal" name ="referal" placeholder="Referal">
+				<Br>
+				<div class="term_cond"style="width: 300px;">
+					<label class="term_cond_lab">I AGREE TO
+						<input type="checkbox" id="term_cond">
+						<span class="term_cond_span"></span>
+					</label>
+					<a href="Javascript: show_terms();" >Terms and Conditions</a>
+				</div>
+				<a onclick='check_reg();' class="log_siup">SIGN UP</a>
+				
+				<a href='Javascript: myreg();' id='fbregbut'class="log_up"style="color: #ebebeb;font-size: 12px;line-height: 4;">CONTINUE WITH FACEBOOK</a>
+				<Br>
+				<b style="color: #9fa8cd;font-size: 14px;">Already a member?</b><Br>
+				<a href='Javascript: show_login();'class="log_in"><img src='images/edit_prof_2.png'> <span>SIGN IN</span></a>
+			<br><br><br>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div id='nogps' style='color:white; font-weight:bold; position:fixed; top:5px; width:100%; text-align:center;'><?echo "$mstr[no_gps]";?></div>
+
+
+	<div id='acc' style='display:none; height:30px; color:black; width:50px; background-color:white; position:fixed; bottom:10px; left:10px; z-index:11000;'></div>
+	<div id='acc_data' style='display:none; height:110px;  color:black;width:200px; background-color:white; position:fixed; bottom:10px; left:10px;  z-index:11000;' onclick="hide_data();">
+
+
+	  <div style='position:absolute; left:0px;top:0px;  color:black;' id='gps_delay_info'></div>
+	  <div style='position:absolute; left: 0px;top:0px; height:90px;  color:black;' id='txtdata'></div>
+	  <div style='position:absolute; left: 0px;bottom:0px;   color:black;' id='gpsdata'></div>
+	  <div style='position:absolute; right:0px;bottom:0px;  color:black;' id='time_data'></div>
+
+	</div>
+	<div id='profile_screen' style=' width:100%; height:100vh;  overflow:auto;'>
+		<div class="pop_left_wrapper" onclick="Javascript: show_screen('home');" id="pop_left_prof">
+			<a class="pop_left">
+				<span></span>
+			</a>
+		</div>
+		<center style="height: 80%;">
+			<div id="prof_logo"class="prof_logo">
+				<a href="Javascript: show_edit();">
+					<div style='position:relative;  width:100px; height:100px;'>
+						<img src="images/avatar.png" id='prof_image' style='position:absolute; left:0px; top:0px; '>
+						<img src="images/avatar_charcho.png" id='prof_image' style='position:absolute; left:0px; top:0px;'>
+					</div>
+				</a>
+				<br>
+				<a id='my_name'></a>
+				<br>
+				<a style='font-size: 13px;color: #8e9eb2;'>Level / Achievement</a>
+				<div></div>
+				<a href="Javascript: show_edit();" class="prof_edprof">
+					<img src='images/edit_prof_2.png'>
+					<span style="">Edit Profile</span>
+				</a>
+				<a href="Javascript: logout();" class="prof_logout">LOG OUT</a>
+			</div>
+			<li class="langli" id="langli"><a href="#" class="langa">ENG</a>
+				<!--<ul class="langul">
+					<li class="langli2"><a href="?m=profile&lang=_en"class="langa2"> ENG</a></li>
+					<li class="langli2"><a href="?m=profile&lang=" class="langa2"> GEO</a></li>
+					<li class="langli2"><a href="?m=profile&lang=_ru" class="langa2"> RUS</a></li>
+				</ul>-->
+			</li>
+			<div id="prof_main"class="prof_main">
+				<a class="ur_rating"><span class="maru"></span>&nbsp;<span id='qulebi'>150</span>
+					<span style='font-size:12px; display:block;margin-top: -5px;margin-left: 20px;'>points</span>
+				</a>
+				
+				<div class="prof_score">
+					<a id='rating'></a>
+					<a>YOUR RATING</a>
+				</div>
+				<div class="prof_ledwek_holder">
+					
+						<div id="prof_led" class="prof_led" onclick="show_leaderboard();" >
+							<p >LEADERBOARD</p>
+							<img src='images/leaderboard_2.png'>
+						</div>
+					
+					
+						<div id="prof_week"class="prof_week" onclick="show_weekly('weekly');" >
+							<p>WEEKLY REPORT</p>
+							<img src='images/week_rep_2.png'>
+						</div>
+					
+					<center>
+
+					<a class="prof_sub" href="Javascript: open_subscribe();" id='subscribtion_div'>Earn Money</a>
+					<a class="prof_sub" href="Javascript: open_referals();" id='referals_but' style='display:none;'>Your Referals</a>
+
+					<a style="display:block"href='Javascript: toggle_debug();' id='toggle_debug2'  style='display:none;'>Toggle Debug</a></center>
+				</div>
+			</div>
+
+			<div id="prof_edit" style="display:none;">
+				<div id="login_logo" class="login_logo"style="">
+					<a><img class="login_logo_img" src='images/letsmove_2.png'></a>
+					<img class="back_img"src="images/background_2.png">
+				</div>
+				<div id="prof_edit_bot"class="prof_edit">
+					<p>Profile Info</p>
+					<div id='my_referer_div' style='display:none;'></div>
+					<input class="prof_inp" type="text"   id="prof_uname" name="prof_uname" placeholder="Your name" value=''><Br>
+					<input class="prof_inp" type="email"  id="prof_email" name="prof_email" aria-describedby="emailHelp" placeholder="Email" value=''><Br>
+					<input class="prof_inp" type="telephone"   id="prof_tel" name="prof_tel"  placeholder="Tel. Number" value=''>
+					<p></p><a href='Javascript: show_change_pass();'>Change Password</a></p>
+					<input class="prof_referal" type="text"  id="prof_referal" name="prof_referal"  placeholder="Your referal ID" value='' readonly="readonly">
+					<a onclick='copy_referal();'><img src='images/copy.png' height='30px'></a><Br>
+					<input class="prof_save"style="" type="button"   id="save_me" name="save_me"  value="Save" onclick="save_profile();"><Br>
+					
+				</div>
+			</div>
+
+			
+			<div id="prof_password" style="display:none;">
+				<div id="login_logo" class="login_logo"style="">
+					<a><img class="login_logo_img" src='images/letsmove_2.png'></a>
+					<img class="back_img"src="images/background_2.png">
+				</div>
+				<div id="prof_edit_bot"class="prof_edit">
+					<p>Change Password</p>
+					<div id='my_referer_div' style='display:none;'></div>
+					<input class="prof_inp" type="password"   id="new_pass" name="new_pass" placeholder="new password" value=''><Br>
+					<input class="prof_inp" type="password"  id="new_pass1" name="new_pass1" placeholder="repeat password" value=''><Br>
+					<input class="prof_save"style="" type="button"   id="change_me" name="change_me"  value="Change" onclick="new_pass();"><Br>
+					
+				</div>
+			</div>
+		</center>
+		<div class="footer" id="footer"></div>
+	</div>
+	
+
+	<div class="leaderboard_screen" id='forgotten_screen' style='color:white; display:none;'>
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('login');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div><Br><br>
+			<div class="led_top">
+				<p>Forgotten Password</p>
+			</div>
+			To restore your password<Br> please enter your email
+			<input class="prof_inp" type="text"   id="forgot_email" name="forgot_email" placeholder="Your Email" value=''><Br>
+			<input class="prof_save"  type="button"   id="forgotten_but" name="forgotten_but"  value="Save" onclick="restore_forgotten();"><Br>
+					
+					
+
+		</center>
+
+	</div>
+
+
+	<div class="leaderboard_screen" id='support_screen' style='color:white;'>
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('home');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div><Br><br>
+			<div class="led_top">
+				<p>Help and Support</p>
+			</div>
+			<div id='support_text'>under construction</div>
+
+		</center>
+
+	</div>
+
+	<div class="leaderboard_screen" id="terms_screen" style='display:none;'>
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('login');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div><Br><br>
+			<div class="led_top">
+				<p>Terms and Conditions</p>
+			</div>
+			<div id='terms_text'></div>
+
+		</center>
+	</div>
+
+
+	<div class="leaderboard_screen" id="referals_screen" style='display:none; '>
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('profile');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div><Br>
+			<div class="led_top" style='border:0;'>
+				<p>You have invited:</p>
+			</div>
+			<div id='referals_text'></div>
+
+		</center>
+	</div>
+
+	<div class="leaderboard_screen" id="weekly_screen" style='display:none;'>
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('profile');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div><Br>
+			<div class="led_top">
+				<p>Weekly Report</p>
+			</div>
+			<div id='weekly_text'></div>
+
+		</center>
+	</div>
+
+	<div class="leaderboard_screen" id="leaderboard_screen">
+		<center>
+			<div class="pop_left_wrapper" onclick="Javascript: show_screen('profile');" id="pop_left">
+				<a class="pop_left">
+					<span></span>
+				</a>
+			</div>
+			<div class="led_top">
+				<p id='rating_2'>20</p>
+				<p>YOUR RATING</p>
+			</div>
+			<div class="led_bot" id='leaderboard_info'>
+				
+			</div>
+		</center>
+	</div>
+</div>
 </body>
+
+
+
+<script>
+/* pop_rights achens mousup ze da akrobs tu sadme sxvagan daacher body shi aris onmouseup chacerili*/
+function pop_right_hider(event)
+{
+var mizani = event.target;	
+if(mizani.id == "pop_right" || mizani.parentNode.id == "pop_right"|| mizani.parentNode.parentNode.id == "pop_right")
+	{
+	document.getElementById("pop_right_span").style.display="none";
+	document.getElementById("profile_txt_old").style.display="inline-flex";
+	document.getElementById("support_txt").style.display="block";
+	/*document.getElementById("chat_txt").style.display="block";*/
+	}
+else
+	{
+	document.getElementById("pop_right_span").style.display="inline-flex";
+	document.getElementById("profile_txt_old").style.display="none";
+	document.getElementById("support_txt").style.display="none";
+	/*document.getElementById("chat_txt").style.display="none";*/
+	}
+}
+
+function toggle_debug(){
+	if(mdebug==0){
+		mdebug=1;
+	} else {
+		mdebug=0;
+	}
+	document.getElementById("toggle_debug1").innerHTML=mdebug+ " Toggle Debug";
+	document.getElementById("toggle_debug2").innerHTML=mdebug+ " Toggle Debug";
+}
+
+function unid_success(uuid)	{
+	myid=uuid;
+	if (mdebug==1){
+		console.log("unique id: "+uuid);
+	}
+}
+
+
+function unid_fail(uuid)	{
+	
+    console.log("fail: "+uuid);
+}
+
+
+function onDeviceReady() 
+	{
+	if (i_have_loaded==1){return;}
+	i_have_loaded=1;
+	show_screen("login");
+	console.log("screen heighting");
+	var x =screen.width; 
+	var y =  screen.height; 
+	document.getElementById("wrapper_div").style.width=x+"px";
+	document.getElementById("wrapper_div").style.height=y+"px";
+	
+	console.log("init start");
+
+	unid=getCookie("unid");
+	if (unid==0 || unid=="")
+		{
+		unid=parseInt(Math.random()*10000000000)
+		setCookie("unid",unid, 365);
+		
+		if (mdebug==1){console.log("new unid: "+unid);}
+		}
+	else
+		{
+			if (mdebug==1){console.log("my unid: "+unid);}
+		}
+	
+	uid=getCookie("uid");
+	if (uid!=null && uid>0)	{
+		show_screen("home");
+		request_mydata();
+	} else {show_screen("login");}
+
+	if (mdebug==1){console.log("backgroundmode enable");}
+	//cordova.plugins.backgroundMode.enable();
+	//cordova.plugins.backgroundMode.setEnabled(true);
+
+
+//cordova.plugins.backgroundMode.setDefaults({
+ //   title: "Letsmove2",
+  //  text: "is running",
+   // icon: 'icon', // this will look for icon.png in platforms/android/res/drawable|mipmap
+    //color: "FFFFFF", // hex format like 'F14F4D'
+  //  resume: true,
+  //  hidden: false,
+  //  bigText: false
+//});
+
+	try {
+		myid=device.uuid;
+		iamweb=0;
+	} catch (e) {
+		iamweb=1;
+	}
+	if (mdebug==1){console.log(myid);}
+	if (myid==""){myid=parseInt(Math.random() * 1000000000); iamweb=1; console.log("web var");}
+	if (mdebug==1){console.log(myid);}
+	if (iamweb==0){
+	
+
+		//cordova.plugins.backgroundMode.on('activate', function() {console.log("background mode optimizations disable"); cordova.plugins.backgroundMode.disableWebViewOptimizations(); });
+		
+		req_loc_acc();
+		req_loc_auth();
+		
+		StatusBar.backgroundColorByHexString('#205690');
+		
+		navigator.geolocation.activator.askActivation(function(response) {
+			if (mdebug==1){console.log("activator");}
+			if (mdebug==1){console.log(response);}
+			//Success callback
+			}, function(response) {
+			//Failure callback
+			});
+	}
+	
+    
+	
+
+		if (mdebug==1){console.log("get unieque device id");}
+//	cordova.plugins.uniqueDeviceID.get(unid_success, unid_fail);
+
+	
+	if (mdebug==1){console.log("device ready, getting position");}
+
+	init_gps();
+	var token;
+	var user_id;
+	
+	if (iamweb==0){
+
+		if (mdebug==1){console.log("pushbots init");}
+		//window.plugins.PushbotsPlugin.initialize("5dddf9233dcb8d26092358a5", {"android":{"sender_id":"754771780635"}});
+	
+	
+
+	//if (localStorage.getItem("pnotif_id") === null) {
+	//	window.plugins.PushbotsPlugin.on("registered", function(token){
+	//		if (mdebug==1){console.log("Registration Id:" + token);}
+	//	window.localStorage.setItem("pnotif_id", token);
+	//	});
+	//	if (mdebug==1){console.log("first lounch");}
+	//} else {
+	//	token = window.localStorage.getItem("pnotif_id");
+	//	if (mdebug==1){console.log("mytoken: "+token);}	
+	//}
+
+	//	window.plugins.PushbotsPlugin.on("user:ids", function(data){
+	//		console.log("user:ids" + JSON.stringify(data));
+	//		token=data["token"];
+	//		window.localStorage.setItem("pnotif_id", token);
+	//		user_id=data["userId"];
+	//		window.localStorage.setItem("pnotifuser_id", token);
+	//		});	
+	}
+	
+	var first_start=getCookie("first_start");
+	if (first_start=="")
+		{
+		setCookie("first_start","1",365);
+		setTimeout("location.reload(); ",100);	
+		}
+
+	if (iamweb==0){
+		advanced_start();
+		AndroidFullScreen.immersiveMode(fsuccessFunction, ferrorFunction);
+	}
+
+	document.addEventListener('DOMContentLoaded', function() {FastClick.attach(document.body);}, false);
+	document.addEventListener('mymap', function() {FastClick.attach(document.getElementById("mymap"));}, false);
+	document.removeEventListener('deviceready', onDeviceReady, false);
+	
+	setTimeout("req_players();",1000);	
+	setTimeout("force_req_gps();",3000);
+	
+    }
+
+	function fsuccessFunction()
+{
+    console.info("It worked!");
+}
+ 
+function ferrorFunction(error)
+{
+    console.error(error);
+}
+
+
+function advanced_start(){
+	
+	AdvancedGeolocation.start(advanced_success,
+function(error){
+console.log("ERROR! " + JSON.stringify(error));
+},
+{
+"minTime":500,         // Min time interval between updates (ms)
+"minDistance":1,       // Min distance between updates (meters)
+"noWarn":true,         // Native location provider warnings
+"providers":"GPS",     // Return GPS, NETWORK and CELL locations
+"useCache":false,       // Return GPS and NETWORK cached locations
+"satelliteData":false, // Return of GPS satellite info
+"buffer":false,        // Buffer location data
+"bufferSize":0,        // Max elements in buffer
+"signalStrength":false // Return cell signal strength data
+});
+
+}
+
+function advanced_success(response){
+
+	var jsonObject = JSON.parse(response);
+	if (mdebug==1){console.log("advanced location");}
+	if (mdebug==1){console.log(jsonObject);}
+}
+
+
+
+function onRequestSuccess(success)
+	{
+		if (mdebug==1){console.log("Successfully requested accuracy "+success.message);}
+	var k=success.message;
+	var b=k.split("agreed");
+	if (b.length>1)
+		{
+		// aplikaciis restarti tu motxovna gaxda sachiro da userma ok utxra
+		location.reload();
+		}
+	
+    }
+
+function onRequestFailure(error)
+	{
+    console.log("Accuracy request failed: error code="+error.code+"; error message="+error.message);
+	}
+
+function req_loc_acc()
+	{
+	var accuracy = 3;
+	var accuracyName  = "High Accuracy";
+	if (mdebug==1){console.log("requesting acc");}
+	cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+	}
+
+function req_loc_auth()	{
+	if (mdebug==1){console.log("requesting auth");}
+	cordova.plugins.diagnostic.isLocationAuthorized(function (authorized) {
+		if(!authorized)
+			{
+
+			cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {
+				if (mdebug==1){console.log("Requested location authorization: authorization was " + status);}
+				}, errorFunction, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+			}
+		else
+			{
+			errorFunction(1);
+			}
+		}, errorFunction);
+	cordova.plugins.diagnostic.requestLocationAuthorization(function (status) {console.log("Requested location authorization: authorization was " + status);}, errorFunction, cordova.plugins.diagnostic.locationAuthorizationMode.ALWAYS);
+}
+
+
+function open_loc_settings()
+	{
+	cordova.plugins.diagnostic.switchToLocationSettings();
+	}
+
+function successFunction()
+	{	
+    console.info("immersive worked!");
+	}
+
+function errorFunction(error)
+	{
+	console.log(error);
+	if (error!=1)
+		{
+		req_loc_acc();
+		req_loc_auth();
+		}
+	}
+
+
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+ d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i <ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+function eraseCookie(name) {   
+	document.cookie = name+'=; Max-Age=-99999999;';  
+}
+	
+
+document.addEventListener("deviceready", onDeviceReady, false);
+
+setTimeout("onDeviceReady();",500);
+
+</script>
+
 </html>

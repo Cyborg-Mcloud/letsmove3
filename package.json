@@ -20,9 +20,9 @@
         "cordova-plugin-geolocation-android-activator": "",
         "cordova-plugin-facebook4": "",
         "cordova.plugins.diagnostic": "",
+        "cordova-plugin-wkwebview-engine": "1.2.1",
         "cordova-plugin-uniquedeviceid": "",
-        "cordova-plugin-insomnia": "",
-        "cordova-plugin-wkwebview-engine": "1.2.1"
+        "cordova-plugin-insomnia": ""
     },
     "scripts": {
         "monaca:preview": "npm run dev & npm run watch",
@@ -52,9 +52,9 @@
                 "APP_NAME": "letsmove"
             },
             "cordova.plugins.diagnostic": {},
+            "cordova-plugin-wkwebview-engine": {},
             "cordova-plugin-uniquedeviceid": {},
-            "cordova-plugin-insomnia": {},
-            "cordova-plugin-wkwebview-engine": {}
+            "cordova-plugin-insomnia": {}
         }
     },
     "devDependencies": {
